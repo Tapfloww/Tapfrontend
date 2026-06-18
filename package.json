@@ -1,0 +1,39 @@
+{
+  "name": "tapfrontend",
+  "version": "1.0.0",
+  "description": "TapFlow - Stellar payment sponsorship dashboard",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tapfloww/Tapfrontend.git"
+  },
+  "keywords": [
+    "stellar",
+    "sponsorship",
+    "dashboard"
+  ],
+  "author": "TapFlow",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Tapfloww/Tapfrontend/issues"
+  },
+  "homepage": "https://github.com/Tapfloww/Tapfrontend#readme",
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.3.1",
+    "@types/node": "^25.9.3",
+    "@types/react": "^19.2.17",
+    "autoprefixer": "^10.5.0",
+    "next": "^16.2.9",
+    "postcss": "^8.5.15",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "tailwindcss": "^4.3.1",
+    "typescript": "^6.0.3"
+  }
+}
