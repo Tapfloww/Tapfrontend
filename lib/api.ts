@@ -99,7 +99,7 @@ export const api = {
 
   createPolicy: (
     appId: string,
-    data: { asset: string; maxFeePerTx: number; dailyCap: number }
+    data: { asset: string; maxFeePerTx: number; dailyCap: number; policyBps?: number }
   ) =>
     withBackend(
       `/v1/apps/${appId}/policies`,
@@ -107,6 +107,19 @@ export const api = {
       () => mockApi.createPolicy(appId, data)
     ),
 
+  quoteFee: (appId: string, amount: number, asset = 'USDC') =>
+    withBackend(
+      `/v1/apps/${appId}/transactions/quote?amount=${amount}&asset=${asset}`,
+      { method: 'GET' },
+      async () => ({
+        amount,
+        asset,
+        policyBps: 20,
+        maxFeePerTx: 10,
+        fee: Math.min(Math.floor((amount * 20) / 10_000), 10),
+        dailyRemaining: 100,
+      })
+    ),
   getWallets: (appId: string) =>
     withBackend(
       `/v1/apps/${appId}/wallets`,
