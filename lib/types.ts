@@ -27,6 +27,7 @@ export interface SponsorPolicy {
   appId: string;
   asset: string;
   maxFeePerTx: number;
+  policyBps?: number;
   dailyCap: number;
   dailyUsed: number;
   createdAt: string;
@@ -50,7 +51,7 @@ export interface Transaction {
   amount: number;
   fee: number;
   asset: string;
-  status: 'pending' | 'success' | 'failed';
+  status: 'pending' | 'pending_onchain' | 'success' | 'failed';
   createdAt: string;
 }
 
