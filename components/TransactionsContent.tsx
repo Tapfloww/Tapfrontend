@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { api } from '@/lib/api';
 import type { App, Transaction } from '@/lib/types';
+import { explorerTxUrl } from '@/lib/stellar';
 import TransactionTable from '@/components/TransactionTable';
 import PageHeader from '@/components/PageHeader';
 import LoadingState from '@/components/LoadingState';
@@ -57,11 +58,7 @@ export default function TransactionsContent() {
     fetchTransactions();
   }, [appId, filterStatus, searchUserId]);
 
-  const getContractLink = (txHash: string) => {
-    const network = process.env.NEXT_PUBLIC_STELLAR_NETWORK || 'testnet';
-    const domain = network === 'mainnet' ? 'stellar.expert' : 'testnet.stellar.expert';
-    return `https://${domain}/tx/${txHash}`;
-  };
+  const getContractLink = (txHash: string) => explorerTxUrl(txHash);
 
   return (
     <div className="space-y-6">

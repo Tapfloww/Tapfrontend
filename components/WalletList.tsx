@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { SponsorWallet } from '@/lib/types';
+import { explorerAccountUrl, shortenAddress } from '@/lib/stellar';
 
 interface WalletListProps {
   wallets: SponsorWallet[];
@@ -51,7 +52,17 @@ export default function WalletList({ wallets, onTopUp }: WalletListProps) {
           <div key={wallet.id} className="card p-5 sm:p-6">
             <div className="flex items-start justify-between gap-4 mb-4">
               <div className="min-w-0">
-                <p className="font-mono text-sm text-slate-600 dark:text-slate-400 truncate">{wallet.address}</p>
+                <p className="font-mono text-sm text-slate-600 dark:text-slate-400 truncate">
+                  <a
+                    href={explorerAccountUrl(wallet.address)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:text-blue-600 dark:hover:text-blue-400"
+                    title={wallet.address}
+                  >
+                    {shortenAddress(wallet.address)}
+                  </a>
+                </p>
                 <p className="text-sm text-slate-500 dark:text-slate-500 mt-1">
                   Asset: <span className="font-medium text-slate-700 dark:text-slate-300">{wallet.asset}</span>
                 </p>

@@ -12,6 +12,7 @@ function StatusBadge({ status }: { status: string }) {
     case 'failed':
       return <span className="badge-error">Failed</span>;
     case 'pending':
+    case 'pending_onchain':
       return <span className="badge-warning">Pending</span>;
     default:
       return <span className="badge">{status}</span>;
@@ -75,14 +76,18 @@ export default function TransactionTable({
                   <StatusBadge status={tx.status} />
                 </td>
                 <td className="px-6 py-4 text-sm">
-                  <a
-                    href={getContractLink(tx.txHash)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 dark:text-blue-400 hover:underline font-mono text-xs"
-                  >
-                    {tx.txHash.substring(0, 8)}...
-                  </a>
+                  {tx.txHash.startsWith('pending_') || !getContractLink(tx.txHash) ? (
+                    <span className="font-mono text-xs text-slate-500">{tx.txHash.substring(0, 16)}…</span>
+                  ) : (
+                    <a
+                      href={getContractLink(tx.txHash)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 dark:text-blue-400 hover:underline font-mono text-xs"
+                    >
+                      {tx.txHash.substring(0, 8)}...
+                    </a>
+                  )}
                 </td>
               </tr>
             ))}
